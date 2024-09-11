@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruleta de 20 Retos Blockchain</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        #spin-button {
+            display: block;
+            width: 200px;
+            height: 50px;
+            margin: 20px auto;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        #challenge-container {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Ruleta de 20 Retos Blockchain</h1>
+        <button id="spin-button">Girar Ruleta</button>
+        <div id="challenge-container"></div>
+    </div>
+
+    <script>
+        const challenges = [
+            {
+                sector: "Gobierno",
+                challenge: "Desarrolla un sistema de votación electrónica basado en blockchain para aumentar la participación ciudadana en tu comunidad local.",
+                hint: "Considera cómo la tecnología blockchain puede garantizar el anonimato y la integridad de los votos.",
+                reference: "Investiga el sistema de e-Residency de Estonia como ejemplo de servicios gubernamentales basados en blockchain."
+            },
+            {
+                sector: "Identificación",
+                challenge: "Formula un sistema de identidad digital descentralizado utilizando blockchain para reducir el fraude de identidad.",
+                hint: "Piensa en cómo blockchain puede permitir a los usuarios controlar sus propios datos de identidad.",
+                reference: "Examina el proyecto uPort para ideas sobre identidad auto-soberana en blockchain."
+            },
+            {
+                sector: "Pagos Móviles",
+                challenge: "Crea un concepto de aplicación que utilice blockchain para facilitar pagos transfronterizos instantáneos y de bajo costo.",
+                hint: "Considera cómo los contratos inteligentes pueden automatizar las conversiones de divisas y reducir las comisiones.",
+                reference: "Investiga cómo Ripple utiliza blockchain para transacciones financieras internacionales."
+            },
+            {
+                sector: "Seguros",
+                challenge: "Formula un sistema de seguros paramétricos basado en blockchain para agricultores afectados por sequías.",
+                hint: "Piensa en cómo los contratos inteligentes pueden automatizar los pagos basados en datos meteorológicos verificables.",
+                reference: "Busca información sobre cómo AIG está explorando el uso de contratos inteligentes en seguros."
+            },
+            {
+                sector: "Cadena de Suministro",
+                challenge: "Diseña un sistema simple de trazabilidad para productos agrícolas utilizando blockchain.",
+                hint: "Considera cómo blockchain puede proporcionar transparencia desde el agricultor hasta el consumidor.",
+                reference: "Investiga cómo Walmart e IBM utilizan blockchain para mejorar la seguridad alimentaria."
+            },
+            {
+                sector: "Energía",
+                challenge: "Formula un sistema basado en blockchain para facilitar el intercambio de energía solar entre vecinos en un barrio residencial.",
+                hint: "Considera cómo los contratos inteligentes pueden automatizar la compra y venta de excedentes de energía.",
+                reference: "Investiga el proyecto Power Ledger como ejemplo de comercio de energía P2P usando blockchain."
+            },
+            {
+                sector: "Registro de Tierras",
+                challenge: "Diseña un sistema de registro de propiedades basado en blockchain para un país en desarrollo con problemas de corrupción en este sector.",
+                hint: "Piensa en cómo la inmutabilidad de blockchain puede prevenir la manipulación de registros.",
+                reference: "Lee sobre cómo Georgia está implementando un sistema de registro de tierras basado en blockchain."
+            },
+            {
+                sector: "Computación",
+                challenge: "Crea un concepto para una plataforma de computación distribuida que utilice blockchain para coordinar y compensar a los participantes.",
+                hint: "Considera cómo blockchain puede garantizar pagos justos por recursos de computación compartidos.",
+                reference: "Investiga el proyecto Golem para ideas sobre computación distribuida en blockchain."
+            },
+            {
+                sector: "Publicidad",
+                challenge: "Diseña un sistema publicitario basado en blockchain que recompense a los usuarios por su atención y datos.",
+                hint: "Piensa en cómo blockchain puede crear un ecosistema más transparente y justo en la publicidad digital.",
+                reference: "Examina el Basic Attention Token (BAT) y su integración con el navegador Brave."
+            },
+            {
+                sector: "Bienes Raíces",
+                challenge: "Formula un sistema basado en blockchain para tokenizar propiedades inmobiliarias, permitiendo inversiones fraccionadas.",
+                hint: "Considera cómo la tokenización puede aumentar la liquidez en el mercado inmobiliario.",
+                reference: "Investiga cómo Propy está utilizando blockchain para transacciones inmobiliarias internacionales."
+            },
+            {
+                sector: "Empresas",
+                challenge: "Diseña una solución blockchain para mejorar la colaboración y el intercambio seguro de datos entre diferentes departamentos de una gran corporación.",
+                hint: "Piensa en cómo blockchain puede proporcionar un registro inmutable y transparente de las interacciones interdepartamentales.",
+                reference: "Explora cómo Microsoft Azure Blockchain Service está siendo utilizado por empresas para soluciones de blockchain."
+            },
+            {
+                sector: "Votación",
+                challenge: "Crea un sistema de votación para accionistas de una empresa utilizando blockchain, que permita el voto a distancia y la transparencia en los resultados.",
+                hint: "Considera cómo blockchain puede garantizar la autenticidad de los votos y prevenir la manipulación.",
+                reference: "Investiga el proyecto 'Follow My Vote' para ideas sobre sistemas de votación basados en blockchain."
+            },
+            {
+                sector: "Salud",
+                challenge: "Diseña un sistema basado en blockchain para el seguimiento y la verificación de la cadena de suministro de medicamentos, combatiendo la falsificación.",
+                hint: "Piensa en cómo la trazabilidad de blockchain puede asegurar la autenticidad de los medicamentos desde el fabricante hasta el paciente.",
+                reference: "Lee sobre cómo MedRec está utilizando blockchain para gestionar registros médicos y permisos."
+            },
+            {
+                sector: "Música",
+                challenge: "Formula una plataforma basada en blockchain para la distribución directa de música, que asegure pagos justos y transparentes a los artistas.",
+                hint: "Considera cómo los contratos inteligentes pueden automatizar la distribución de regalías.",
+                reference: "Investiga cómo Ujo Music está utilizando blockchain para revolucionar la industria musical."
+            },
+            {
+                sector: "Caridad",
+                challenge: "Diseña un sistema basado en blockchain para aumentar la transparencia y la rendición de cuentas en organizaciones benéficas.",
+                hint: "Piensa en cómo blockchain puede proporcionar un registro transparente e inmutable de donaciones y gastos.",
+                reference: "Examina cómo BitGive utiliza blockchain para mejorar la transparencia en las donaciones caritativas."
+            },
+            {
+                sector: "Educación",
+                challenge: "Crea un sistema basado en blockchain para la emisión y verificación de credenciales académicas, reduciendo el fraude y facilitando la verificación por empleadores.",
+                hint: "Considera cómo blockchain puede proporcionar un registro inmutable y fácilmente verificable de logros académicos.",
+                reference: "Investiga el proyecto Blockcerts, iniciado por MIT Media Lab, para la emisión de certificados académicos en blockchain."
+            },
+            {
+                sector: "Transporte",
+                challenge: "Diseña un sistema de gestión de la cadena de suministro basado en blockchain para la industria automotriz, mejorando la trazabilidad de las piezas.",
+                hint: "Piensa en cómo blockchain puede ayudar a rastrear el origen y la autenticidad de cada componente de un vehículo.",
+                reference: "Lee sobre cómo BMW está utilizando blockchain para la trazabilidad en su cadena de suministro."
+            },
+            {
+                sector: "Medios de Comunicación",
+                challenge: "Formula una plataforma basada en blockchain para combatir las noticias falsas y verificar la autenticidad de las fuentes de información.",
+                hint: "Considera cómo blockchain puede proporcionar un registro inmutable de la procedencia y las modificaciones de una noticia.",
+                reference: "Investiga el proyecto Civil, una plataforma de periodismo basada en blockchain."
+            },
+            {
+                sector: "Agricultura",
+                challenge: "Diseña un sistema basado en blockchain para la trazabilidad de productos orgánicos, desde la granja hasta el consumidor.",
+                hint: "Piensa en cómo blockchain puede proporcionar transparencia en cada etapa de la producción y distribución de alimentos orgánicos.",
+                reference: "Examina cómo Carrefour está utilizando blockchain para la trazabilidad de algunos de sus productos alimenticios."
+            },
+            {
+                sector: "Gestión de Residuos",
+                challenge: "Crea un sistema de incentivos basado en blockchain para fomentar el reciclaje y la reducción de residuos en una ciudad inteligente.",
+                hint: "Considera cómo los tokens basados en blockchain pueden recompensar a los ciudadanos por prácticas sostenibles.",
+                reference: "Investiga el proyecto RecycleToCoin, que utiliza blockchain para incentivar el reciclaje."
+            }
+        ];
+
+        document.getElementById('spin-button').addEventListener('click', function() {
+            const randomIndex = Math.floor(Math.random() * challenges.length);
+            const challenge = challenges[randomIndex];
+            
+            document.getElementById('challenge-container').innerHTML = `
+                <h2>${challenge.sector}</h2>
+                <p><strong>Reto:</strong> ${challenge.challenge}</p>
+                <p><strong>Pista:</strong> ${challenge.hint}</p>
+                <p><strong>Para investigar:</strong> ${challenge.reference}</p>
+            `;
+        });
+    </script>
+</body>
+</html>
